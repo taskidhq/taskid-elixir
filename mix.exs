@@ -5,6 +5,8 @@ defmodule Taskid.MixProject do
     [
       app: :taskid,
       version: "0.1.0",
+      description: "Takid's client library for Elixir applications",
+      package: package(),
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -21,8 +23,19 @@ defmodule Taskid.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:jason, "~> 1.2"},
+      {:plug, "~> 1.11"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+    ]
+  end
+
+  defp package() do
+    [
+      name: "taskid",
+      licenses: ["Apache-2.0"],
+      files: ~w(lib .formatter.exs mix.exs README.md LICENSE CHANGELOG),
+      links: %{"GitHub" => "https://github.com/taskidhq/taskid-elixir"},
+      source_url: "https://github.com/taskidhq/taskid-elixir"
     ]
   end
 end
