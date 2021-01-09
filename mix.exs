@@ -4,7 +4,7 @@ defmodule Taskid.MixProject do
   def project do
     [
       app: :taskid,
-      version: "0.1.0",
+      version: "0.2.0",
       description: "Takid's client library for Elixir applications",
       package: package(),
       elixir: "~> 1.11",
