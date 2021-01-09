@@ -1,8 +1,11 @@
 defmodule Taskid.Tasks do
   def modules do
-    # TODO: make app name configurable
-    :ok = Application.ensure_loaded(:taskid_demo_app)
-    {:ok, all_modules} = :application.get_key(:taskid_demo_app, :modules)
+    Enum.flat_map(applications(), &taskid_task_modules_for_app/1)
+  end
+
+  defp taskid_task_modules_for_app(application) do
+    :ok = Application.ensure_loaded(application)
+    {:ok, all_modules} = :application.get_key(application, :modules)
 
     Enum.reduce(all_modules, [], fn module, acc ->
       module_behaviours = get_module_behaviours(module)
@@ -14,6 +17,8 @@ defmodule Taskid.Tasks do
       end
     end)
   end
+
+  defp applications, do: Application.fetch_env!(:taskid, :applications)
 
   defp get_module_behaviours(module) do
     :attributes |> module.module_info() |> Keyword.get(:behaviour, [])

@@ -16,3 +16,11 @@ def deps do
   ]
 end
 ```
+
+Configure `taskid` in `config/config.exs`:
+
+```elixir
+config :taskid, applications: [
+  # A list with all the applications that have Taskid tasks defined
+]
+```
